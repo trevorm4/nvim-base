@@ -7,50 +7,8 @@ return {
 		"ray-x/go.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 	},
-
-	config = function()
-		require("conform").setup({
-			formatters_by_ft = {},
-		})
-		local cmp_lsp = require("cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			cmp_lsp.default_capabilities()
-		)
-
-		-- Modern LspAttach autocommand for keymaps
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-			callback = function(ev)
-				local opts = { buffer = ev.buf }
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "K", function()
-					vim.lsp.buf.hover({ border = "rounded" })
-				end, opts)
-				vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
-				vim.keymap.set("n", "<leader>dn", function()
-					vim.diagnostic.jump({ count = 1, float = true })
-				end, opts)
-				vim.keymap.set("n", "<leader>dp", function()
-					vim.diagnostic.jump({ count = -1, float = true })
-				end, opts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
-				vim.keymap.set("i", "<C-h>", function()
-					vim.lsp.buf.signature_help({ border = "rounded" })
-				end, opts)
-			end,
-		})
-
-		require("fidget").setup({})
-		require("mason").setup()
-		require("go").setup()
-
-		-- Configure servers using the new Neovim 0.11+ APIs
-		local servers = {
+	opts = {
+		servers = {
 			gopls = {},
 			rust_analyzer = {},
 			ts_ls = {},
@@ -79,11 +37,53 @@ return {
 					},
 				},
 			},
-		}
+		},
+	},
+	config = function(_, opts)
+		require("conform").setup({
+			formatters_by_ft = {},
+		})
+		local cmp_lsp = require("cmp_nvim_lsp")
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			cmp_lsp.default_capabilities()
+		)
 
-		for server_name, config in pairs(servers) do
-			config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {})
-			vim.lsp.config(server_name, config)
+		-- Modern LspAttach autocommand for keymaps
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				local opts_attach = { buffer = ev.buf }
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts_attach)
+				vim.keymap.set("n", "K", function()
+					vim.lsp.buf.hover({ border = "rounded" })
+				end, opts_attach)
+				vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts_attach)
+				vim.keymap.set("n", "<leader>dn", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end, opts_attach)
+				vim.keymap.set("n", "<leader>dp", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end, opts_attach)
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts_attach)
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts_attach)
+				vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts_attach)
+				vim.keymap.set("i", "<C-h>", function()
+					vim.lsp.buf.signature_help({ border = "rounded" })
+				end, opts_attach)
+			end,
+		})
+
+		require("fidget").setup({})
+		require("mason").setup()
+		require("go").setup()
+
+		-- Configure servers from opts
+		for server_name, server_config in pairs(opts.servers or {}) do
+			server_config.capabilities = vim.tbl_deep_extend("force", capabilities, server_config.capabilities or {})
+			vim.lsp.config(server_name, server_config)
 			vim.lsp.enable(server_name)
 		end
 

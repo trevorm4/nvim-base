@@ -44,7 +44,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.colorcolumn = ""
 vim.cmd.colorscheme("sonokai")
 
 -- Support optional work module for non-plugin config
