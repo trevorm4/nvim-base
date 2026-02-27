@@ -27,5 +27,3 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 250
-
-vim.opt.colorcolumn = "80"
