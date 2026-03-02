@@ -17,7 +17,7 @@ return {
 		config = function()
 			require("code_layout").setup({
 				floating = {
-					annotate = true, -- Set to false to hide the full symbol path in the fzf window
+					annotate = false,
 				},
 			})
 		end,
