@@ -15,9 +15,6 @@ return {
         },
       })
 
-      ---@param name string Name for the keymap description
-      ---@param command string The binary to run
-      ---@param keymap string The key sequence to trigger it
       local function register_floating_binary(name, command, keymap)
         local term = Terminal:new({
           cmd = command,
