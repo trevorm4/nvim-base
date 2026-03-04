@@ -60,6 +60,20 @@ return {
 				end,
 				desc = "Fzf LSP Workspace Symbols",
 			},
+			{
+				"<leader>fd",
+				function()
+					require("fzf-lua").diagnostics_document()
+				end,
+				desc = "Fzf LSP Diagnostics",
+			},
+			{
+				"<leader>wd",
+				function()
+					require("fzf-lua").diagnostics_workspace()
+				end,
+				desc = "Fzf LSP Workspace Symbols",
+			},
 		},
 		config = function()
 			require("fzf-lua").setup({})
