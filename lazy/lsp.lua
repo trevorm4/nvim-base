@@ -12,15 +12,6 @@ return {
 			gopls = {},
 			rust_analyzer = {},
 			ts_ls = {},
-			oxlint = {
-				filetypes = {
-					"scss",
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-				},
-			},
 			lua_ls = {
 				settings = {
 					Lua = {
