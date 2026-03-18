@@ -52,6 +52,18 @@ return {
 			["gx"] = "actions.open_external",
 			["g."] = "actions.toggle_hidden",
 			["g\\"] = "actions.toggle_trash",
+			["gy"] = {
+				callback = function()
+					local entry = require("oil").get_cursor_entry()
+					local dir = require("oil").get_current_dir()
+					if entry and dir then
+						local path = vim.fs.joinpath(dir, entry.name)
+						vim.fn.setreg("+", path)
+						vim.notify("Copied " .. path .. " to clipboard")
+					end
+				end,
+				desc = "Copy absolute path",
+			},
 		},
 	},
 	init = function()
