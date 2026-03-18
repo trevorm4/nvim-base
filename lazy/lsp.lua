@@ -5,7 +5,6 @@ return {
 		"williamboman/mason.nvim",
 		"j-hui/fidget.nvim",
 		"ray-x/go.nvim",
-		"hrsh7th/cmp-nvim-lsp",
 	},
 	opts = {
 		servers = {
@@ -34,13 +33,7 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {},
 		})
-		local cmp_lsp = require("cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			cmp_lsp.default_capabilities()
-		)
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Modern LspAttach autocommand for keymaps
 		vim.api.nvim_create_autocmd("LspAttach", {
