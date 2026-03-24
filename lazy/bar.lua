@@ -10,10 +10,11 @@ return {
 				lualine_b = {
 					{ require("trevor.components.jujutsu").component },
 				},
-				lualine_c = {},
-				lualine_x = {},
+				lualine_c = {'filetype', 'filename'},
+				lualine_x = {'diagnostics', 'lsp_status'},
 			},
 			inactive_sections = {},
 		})
 	end,
 }
+
