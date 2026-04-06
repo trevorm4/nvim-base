@@ -40,3 +40,8 @@ map("n", "<leader>ay", "<cmd>1,$y+<CR>", { desc = "Yank whole file to system cli
 map("n", "<leader>da", "<cmd>:%d<CR>", { desc = "Delete all lines in buffer" })
 
 map("n", "<leader>cl", ":TermSelect<CR>") -- List and select terminals
+
+vim.o.tabstop = 2         -- size of a hard tabstop
+vim.o.shiftwidth = 2      -- size of an indentation
+vim.o.expandtab = true    -- use spaces instead of tabs
+vim.o.softtabstop = 2     -- number of spaces a <Tab> counts for

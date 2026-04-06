@@ -12,7 +12,7 @@ return {
 				desc = "Fzf Files",
 			},
 			{
-				"<leader>ps",
+				"<leader>ks",
 				function()
 					require("fzf-lua").live_grep()
 				end,

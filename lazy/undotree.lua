@@ -1,7 +1,7 @@
 return {
-	"mbbill/undotree",
-
-	config = function()
-		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-	end,
+	dir = vim.env.VIMRUNTIME .. "/pack/dist/opt/nvim.undotree",
+	name = "undotree",
+	keys = {
+		{ "<leader>u", function() require("undotree").open() end, desc = "Toggle undotree" },
+	},
 }
