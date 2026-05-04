@@ -38,6 +38,7 @@ map("n", "<leader>j", "<cmd>lprev<CR>zz")
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 map("n", "<leader>ay", "<cmd>1,$y+<CR>", { desc = "Yank whole file to system clipboard" })
 map("n", "<leader>da", "<cmd>:%d<CR>", { desc = "Delete all lines in buffer" })
+map('n', '<leader>rn', vim.lsp.buf.rename, {})
 
 map("n", "<leader>cl", ":TermSelect<CR>") -- List and select terminals
 

@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 require("trevor.set")
 require("trevor.remap")
 

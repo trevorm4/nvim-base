@@ -14,7 +14,7 @@ return {
 			{
 				"<leader>ks",
 				function()
-					require("fzf-lua").live_grep()
+					require("fzf-lua").live_grep_native()
 				end,
 				desc = "Fzf Live Grep",
 			},
@@ -76,8 +76,21 @@ return {
 			},
 		},
 		config = function()
-			require("fzf-lua").setup({})
+			local actions = require("fzf-lua.actions")
+			require("fzf-lua").setup({
+				files = {
+					fd_opts = [[--color=never --type f --hidden --follow --exclude .git --exclude .jj]],
+					actions = {
+						["ctrl-s"] = actions.toggle_hidden,
+					},
+				},
+				grep = {
+					rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --glob '!.git' --glob '!.jj' -e",
+					actions = {
+						["ctrl-s"] = actions.toggle_hidden,
+					},
+				},
+			})
 		end,
 	},
 }
-

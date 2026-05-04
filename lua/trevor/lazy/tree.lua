@@ -27,10 +27,7 @@ return {
 		skip_confirm_for_simple_edits = true,
 		view_options = {
 			-- Show files and directories that start with "."
-			show_hidden = false,
-			is_hidden_file = function(name, bufnr)
-				return vim.startswith(name, ".")
-			end,
+			show_hidden = true,
 		},
 		keymaps = {
 			["g?"] = "actions.show_help",
